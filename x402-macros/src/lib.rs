@@ -11,6 +11,7 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
     let _token = extract_token(&args_str)
         .unwrap_or_else(|| "11111111111111111111111111111111".to_string());
     let _facilitator_fee = extract_facilitator_fee(&args_str).unwrap_or(0);
+    let _recipient = extract_recipient(&args_str);
 
     let vis = &input_fn.vis;
     let sig = &input_fn.sig;
@@ -61,6 +62,13 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
 
                 if payment_amount < X402_REQUIRED_AMOUNT {
                     return Err(ProgramError::InsufficientFunds.into());
+                }
+
+                let expected_recipient = anchor_lang::solana_program::pubkey!("ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa");
+                let payment_recipient = previous_ix.accounts.get(1).map(|acc| acc.pubkey);
+
+                if payment_recipient != Some(expected_recipient) {
+                    return Err(ProgramError::InvalidArgument.into());
                 }
             }
 
@@ -113,4 +121,20 @@ fn extract_facilitator_fee(args: &str) -> Option<u8> {
         .trim();
 
     fee_str.parse().ok()
+}
+
+fn extract_recipient(args: &str) -> Option<String> {
+    let recipient_str = args
+        .split("recipient")
+        .nth(1)?
+        .split('=')
+        .nth(1)?
+        .trim()
+        .split(',')
+        .next()?
+        .trim()
+        .trim_matches('"')
+        .to_string();
+
+    Some(recipient_str)
 }

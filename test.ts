@@ -19,8 +19,8 @@ async function test() {
   const balance = await connection.getBalance(payer.publicKey);
   console.log("Balance before:", (balance / 1e9).toFixed(9), "SOL");
 
-  const developerTreasury = Keypair.generate();
-  console.log("Developer Treasury:", developerTreasury.publicKey.toString());
+  const developerTreasury = new PublicKey("ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa");
+  console.log("Developer Treasury:", developerTreasury.toString());
 
   const paymentAmount = 1_000_000;
 
