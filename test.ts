@@ -39,10 +39,7 @@ async function test() {
 
   const finalBalance = await connection.getBalance(payer.publicKey);
   console.log("Balance after:", (finalBalance / 1e9).toFixed(9), "SOL");
-  console.log("Spent:", ((balance - finalBalance) / 1e9).toFixed(9), "SOL");
 
-  const recipientBalance = await connection.getBalance(paymentRecipient);
-  console.log("Recipient received:", (recipientBalance / 1e9).toFixed(9), "SOL");
 }
 
 test().catch((err) => {
