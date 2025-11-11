@@ -15,4 +15,4 @@ cluster = "Devnet"
 wallet = "/Users/avhidotsol/.config/solana/id.json"
 
 [scripts]
-test = "yarn run ts-mocha --timeout 1000000 tests/**/*.ts"
+test = "yarn run ts-mocha --timeout 1000000 x402-example/tests/**/*.ts"

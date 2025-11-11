@@ -123,6 +123,7 @@ pub struct X402Pay<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
     #[account(mut)]
+    /// CHECK: Payment recipient account, validated by x402 macro
     pub payment_recipient: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
 }

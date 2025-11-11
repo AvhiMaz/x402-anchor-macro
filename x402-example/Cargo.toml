@@ -12,3 +12,6 @@ anchor-spl.workspace = true
 solana-program.workspace = true
 spl-token.workspace = true
 x402-macros = { path = "../x402-macros" }
+
+[features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
