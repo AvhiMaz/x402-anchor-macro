@@ -1,0 +1,21 @@
+[package]
+name = "x402-macros"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+keywords = ["solana", "anchor", "payment", "macro"]
+categories = ["development-tools::procedural-macro-helpers"]
+readme = "README.md"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn.workspace = true
+quote.workspace = true
+proc-macro2.workspace = true
