@@ -19,14 +19,16 @@ async function test() {
   const balance = await connection.getBalance(payer.publicKey);
   console.log("Balance before:", (balance / 1e9).toFixed(9), "SOL");
 
-  const developerTreasury = Keypair.generate();
-  console.log("Developer Treasury:", developerTreasury.publicKey.toString());
+  // User triggers their program function with #[x402(price = ..., address = "...")]
+  // The macro automatically validates the payment inside
+  // User provides their own address and price in the macro \
 
+  const paymentRecipient = new PublicKey("ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa");
   const paymentAmount = 1_000_000;
 
   const paymentIx = SystemProgram.transfer({
     fromPubkey: payer.publicKey,
-    toPubkey: developerTreasury,
+    toPubkey: paymentRecipient,
     lamports: paymentAmount,
   });
 
@@ -39,8 +41,8 @@ async function test() {
   console.log("Balance after:", (finalBalance / 1e9).toFixed(9), "SOL");
   console.log("Spent:", ((balance - finalBalance) / 1e9).toFixed(9), "SOL");
 
-  const treasuryBalance = await connection.getBalance(developerTreasury);
-  console.log("Treasury received:", (treasuryBalance / 1e9).toFixed(9), "SOL");
+  const recipientBalance = await connection.getBalance(paymentRecipient);
+  console.log("Recipient received:", (recipientBalance / 1e9).toFixed(9), "SOL");
 }
 
 test().catch((err) => {

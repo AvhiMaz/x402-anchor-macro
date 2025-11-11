@@ -9,7 +9,7 @@ declare_id!("9xwTdtTvo4h1tZWakCz3JPSpi4ePht9VHzujtr2Dywb1");
 pub mod x402_example {
     use super::*;
 
-    #[x402(price = 1_000_000)]
+    #[x402(price = 1_000_000, address = "ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa")]
     pub fn premium_compute(ctx: Context<PremiumCompute>) -> Result<()> {
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 42;
@@ -24,7 +24,7 @@ pub mod x402_example {
         Ok(())
     }
 
-    #[x402(price = 5_000_000)]
+    #[x402(price = 5_000_000, address = "ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa")]
     pub fn standard_compute(ctx: Context<PremiumCompute>) -> Result<()> {
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 100;
@@ -39,7 +39,7 @@ pub mod x402_example {
         Ok(())
     }
 
-    #[x402(price = 50_000_000)]
+    #[x402(price = 50_000_000, address = "ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa")]
     pub fn enterprise_compute(ctx: Context<PremiumCompute>) -> Result<()> {
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 1000;

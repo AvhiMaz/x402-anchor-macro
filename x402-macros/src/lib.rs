@@ -11,7 +11,7 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
     let _token = extract_token(&args_str)
         .unwrap_or_else(|| "11111111111111111111111111111111".to_string());
     let _facilitator_fee = extract_facilitator_fee(&args_str).unwrap_or(0);
-    let _recipient = extract_recipient(&args_str);
+    let recipient_address = extract_recipient(&args_str).unwrap_or_else(|| "11111111111111111111111111111111".to_string());
 
     let vis = &input_fn.vis;
     let sig = &input_fn.sig;
@@ -21,6 +21,7 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
         #vis #sig {
             {
                 const X402_REQUIRED_AMOUNT: u64 = #price;
+                const X402_RECIPIENT: &str = #recipient_address;
 
                 use anchor_lang::solana_program::sysvar::instructions;
                 use anchor_lang::solana_program::program_error::ProgramError;
@@ -62,6 +63,13 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
 
                 if payment_amount < X402_REQUIRED_AMOUNT {
                     return Err(ProgramError::InsufficientFunds.into());
+                }
+
+                let payment_recipient = previous_ix.accounts.get(1)
+                    .map(|acc| acc.pubkey.to_string());
+
+                if payment_recipient.as_ref() != Some(&X402_RECIPIENT.to_string()) {
+                    return Err(ProgramError::InvalidArgument.into());
                 }
             }
 
