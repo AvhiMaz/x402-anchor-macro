@@ -1,0 +1,31 @@
+[workspace]
+members = [
+    "x402-macros",
+    "x402-example",
+]
+# Note: x402-facilitator is a Node.js/TypeScript project, managed separately via npm
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "Payment gating macro for Solana Anchor programs"
+license = "MIT"
+repository = "https://github.com/yourname/x402-anchor-macros"
+homepage = "https://github.com/yourname/x402-anchor-macros"
+documentation = "https://docs.rs/x402-macros"
+keywords = ["solana", "anchor", "payment", "x402"]
+categories = ["development-tools::procedural-macro-helpers"]
+
+[workspace.dependencies]
+anchor-lang = "0.30.1"
+anchor-spl = "0.30.1"
+solana-program = "1.18"
+spl-token = "4"
+syn = { version = "2.0", features = ["full"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+
+[profile.release]
+overflow-checks = true
