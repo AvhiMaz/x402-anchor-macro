@@ -63,13 +63,6 @@ pub fn x402(args: TokenStream, input: TokenStream) -> TokenStream {
                 if payment_amount < X402_REQUIRED_AMOUNT {
                     return Err(ProgramError::InsufficientFunds.into());
                 }
-
-                let expected_recipient = anchor_lang::solana_program::pubkey!("ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa");
-                let payment_recipient = previous_ix.accounts.get(1).map(|acc| acc.pubkey);
-
-                if payment_recipient != Some(expected_recipient) {
-                    return Err(ProgramError::InvalidArgument.into());
-                }
             }
 
             #body

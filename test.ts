@@ -19,14 +19,14 @@ async function test() {
   const balance = await connection.getBalance(payer.publicKey);
   console.log("Balance before:", (balance / 1e9).toFixed(9), "SOL");
 
-  const developerTreasury = new PublicKey("ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa");
-  console.log("Developer Treasury:", developerTreasury.toString());
+  const developerTreasury = Keypair.generate();
+  console.log("Developer Treasury:", developerTreasury.publicKey.toString());
 
   const paymentAmount = 1_000_000;
 
   const paymentIx = SystemProgram.transfer({
     fromPubkey: payer.publicKey,
-    toPubkey: developerTreasury.publicKey,
+    toPubkey: developerTreasury,
     lamports: paymentAmount,
   });
 
@@ -39,11 +39,11 @@ async function test() {
   console.log("Balance after:", (finalBalance / 1e9).toFixed(9), "SOL");
   console.log("Spent:", ((balance - finalBalance) / 1e9).toFixed(9), "SOL");
 
-  const treasuryBalance = await connection.getBalance(developerTreasury.publicKey);
+  const treasuryBalance = await connection.getBalance(developerTreasury);
   console.log("Treasury received:", (treasuryBalance / 1e9).toFixed(9), "SOL");
 }
 
-test().catch(err => {
+test().catch((err) => {
   console.error(err.message);
   process.exit(1);
 });
