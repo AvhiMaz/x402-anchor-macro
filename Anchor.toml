@@ -1,0 +1,18 @@
+[toolchain]
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.devnet]
+x402_example = "9xwTdtTvo4h1tZWakCz3JPSpi4ePht9VHzujtr2Dywb1"
+
+[registry]
+url = "https://api.dev.anchor-lang.com"
+
+[provider]
+cluster = "Devnet"
+wallet = "/Users/avhidotsol/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha --timeout 1000000 tests/**/*.ts"
