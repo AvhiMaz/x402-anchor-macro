@@ -1,0 +1,19 @@
+{
+  "name": "x402-anchor-macros",
+  "version": "0.1.0",
+  "description": "x402 Anchor Macros - Payment gating for Solana programs",
+  "private": true,
+  "workspaces": [
+    "ts-client"
+  ],
+  "scripts": {
+    "build": "cargo build --release && yarn workspace @x402/client build",
+    "test": "cargo test",
+    "clean": "cargo clean",
+    "example": "cd x402-example && yarn build"
+  },
+  "devDependencies": {
+    "@solana/web3.js": "^1.78.0",
+    "typescript": "^5.0.0"
+  }
+}
