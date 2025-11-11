@@ -17,7 +17,7 @@ async function test() {
   console.log("Payer:", payer.publicKey.toString());
 
   const balance = await connection.getBalance(payer.publicKey);
-  console.log("Balance before:", (balance / 1e9).toFixed(9), "SOL");
+  console.log("Balance:", (balance / 1e9).toFixed(9), "SOL");
 
   // User triggers their program function with #[x402(price = ..., address = "...")]
   // The macro automatically validates the payment inside
@@ -36,9 +36,6 @@ async function test() {
   const sig = await sendAndConfirmTransaction(connection, tx, [payer]);
 
   console.log("Transaction:", sig);
-
-  const finalBalance = await connection.getBalance(payer.publicKey);
-  console.log("Balance after:", (finalBalance / 1e9).toFixed(9), "SOL");
 
 }
 
