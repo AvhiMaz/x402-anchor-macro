@@ -11,6 +11,8 @@ pub mod x402_example {
 
     #[x402(price = 1_000_000)]
     pub fn premium_compute(ctx: Context<PremiumCompute>) -> Result<()> {
+        // Payment validated by macro
+        // Must send 1_000_000 lamports to ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 42;
         ctx.accounts.result.paid = true;
@@ -26,6 +28,8 @@ pub mod x402_example {
 
     #[x402(price = 5_000_000)]
     pub fn standard_compute(ctx: Context<PremiumCompute>) -> Result<()> {
+        // Payment validated by macro
+        // Must send 5_000_000 lamports to ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 100;
         ctx.accounts.result.paid = true;
@@ -41,7 +45,8 @@ pub mod x402_example {
 
     #[x402(price = 50_000_000)]
     pub fn enterprise_compute(ctx: Context<PremiumCompute>) -> Result<()> {
-
+        // Payment validated by macro
+        // Must send 50_000_000 lamports to ESPyXCB93a6CvrAE2btofpgXAswf4oE3NuziBsHVCAZa
         ctx.accounts.result.owner = ctx.accounts.payer.key();
         ctx.accounts.result.value = 1000;
         ctx.accounts.result.paid = true;
